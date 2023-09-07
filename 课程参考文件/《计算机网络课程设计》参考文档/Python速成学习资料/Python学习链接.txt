@@ -1,0 +1,4 @@
+Python 入门指南（Python 3.6.3 中文手册）：https://www.runoob.com/manual/pythontutorial3/docs/html/
+Python 3教程：https://www.runoob.com/python3/python3-tutorial.html
+廖雪峰的官方网站Python教程：https://www.liaoxuefeng.com/wiki/1016959663602400
+python视频学习网站（python教程2019版 6小时完全入门 并且达到能开发网站的能力 目前最好的python教程 （含中文翻译））：https://www.bilibili.com/video/av75855831

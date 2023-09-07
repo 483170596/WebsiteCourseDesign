@@ -1,0 +1,5 @@
+介绍：https://www.osgeo.cn/scapy/introduction.html
+下载和安装：https://www.osgeo.cn/scapy/installation.html
+使用：https://www.osgeo.cn/scapy/usage.html
+交互式教程：https://www.osgeo.cn/scapy/usage.html#interactive-tutorial
+Scapy API参考(重点)：https://www.osgeo.cn/scapy/api/scapy.html

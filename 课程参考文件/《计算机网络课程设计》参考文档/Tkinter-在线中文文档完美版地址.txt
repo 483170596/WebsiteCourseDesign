@@ -1,0 +1,18 @@
+Tkinter从入门到实战详解：http://www.bczl.xyz/tkinter/doc/
+Tk图形用户界面(GUI)：https://docs.python.org/zh-cn/3/library/tk.html
+tkinter.ttk --- Tk 风格的控件：https://docs.python.org/zh-cn/3/library/tkinter.ttk.html#ttk-styling
+Python GUI编程(Tkinter)：https://www.runoob.com/python/python-gui-tkinter.html
+Python Tkinter 复选框（Checkbutton）：https://www.runoob.com/python/python-tk-checkbutton.html
+
+Python - GUI（Graphical User Interface，图形用户界面） ：https://www.cnblogs.com/anliven/p/9998693.html
+Tkinter
+https://docs.python.org/3/library/tkinter.html
+Python自带的标准GUI库，可用于快速创建GUI应用程序，能够满足基本的GUI程序要求；；
+Tkinter是对图形库TK的封装，跨平台（在windows下编写的脚本，可以不加修改的在linux,unix等系统下运行）；
+如果是非常复杂的GUI程序，建议用操作系统原生支持的语言和库来编写；
+在线教程
+EN：http://effbot.org/tkinterbook/
+CN：https://www.rddoc.com/doc/Python/3.6.0/zh/library/tk/
+其他
+Python GUI编程(Tkinter)：http://www.runoob.com/python/python-gui-tkinter.html
+Tkinter开发者手册（腾讯云）：https://cloud.tencent.com/developer/section/1372347

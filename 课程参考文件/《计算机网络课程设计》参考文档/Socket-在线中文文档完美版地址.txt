@@ -1,0 +1,6 @@
+socket --- 底层网络接口：https://docs.python.org/zh-cn/3/library/socket.html
+Python3 网络编程：https://www.runoob.com/python3/python3-socket.html
+Python3 Socket编程：https://blog.csdn.net/piglite/article/details/78389310
+python之路 socket、socket server：https://www.cnblogs.com/zhangkui/p/5655428.html
+python socket编程实例代码（含服务端和客户端）：https://blog.csdn.net/ssxueyi/article/details/83996335
+Python3服务端和客户端：https://blog.csdn.net/csdnlinyongsheng/article/details/86620812

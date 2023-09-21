@@ -1,4 +1,4 @@
-# 16进制
+# 16进制对应的10进制
 HEX = {'0': 0,
        '1': 1,
        '2': 2,
@@ -173,7 +173,7 @@ ICMP_TYPES = {0: "echo-reply",
               38: "domain-name-reply",
               39: "skip",
               40: "photuris"}
-# ICMP 代码
+# ICMP类型细分代码
 ICMP_CODES = {3: {0: "network-unreachable",
                   1: "host-unreachable",
                   2: "protocol-unreachable",
@@ -204,10 +204,10 @@ ICMP_CODES = {3: {0: "network-unreachable",
                    4: "need-authentification",
                    5: "need-authorization", }, }
 # IPv6 中 ENC字段
-# 00 – 不支持 ECN 的传输，非 ECT(Non ECN-Capable Transport)
-# 10 – 支持 ECN 的传输，ECT(0)
-# 01 – 支持 ECN 的传输，ECT(1)
-# 11 – 发生拥塞，CE(Congestion Experienced)。
+"""00 – 不支持 ECN 的传输，非 ECT(Non ECN-Capable Transport)
+10 – 支持 ECN 的传输，ECT(0)
+01 – 支持 ECN 的传输，ECT(1)
+11 – 发生拥塞，CE(Congestion Experienced)。"""
 ECN_TYPES = {
     "00": ["Not-ECT", "Not ECN-Capable Transport (0)"],
     "01": ["ECT(1)", "ECT-1 (1)"],
@@ -241,11 +241,11 @@ DSCP_TYPES = {
 # qr：表示DNS报文的类型，0表示查询报文，1表示响应报文
 DNS_TYPES = {0: "query", 1: "response"}
 # DNS请求或响应的操作码
-# QUERY (0)：标识DNS查询操作，用于发送DNS查询请求。
-# IQUERY (1)：标识反向查询操作，用于从IP地址查找主机名。
-# STATUS (2)：标识DNS状态查询操作，用于获取DNS服务器的状态信息。
-# NOTIFY (4)：DNS通知操作，用于通知从属DNS服务器有关资源记录的变更。
-# UPDATE (5)：DNS更新操作，用于向DNS服务器添加或删除资源记录。
+"""QUERY (0)：标识DNS查询操作，用于发送DNS查询请求。
+IQUERY (1)：标识反向查询操作，用于从IP地址查找主机名。
+STATUS (2)：标识DNS状态查询操作，用于获取DNS服务器的状态信息。
+NOTIFY (4)：DNS通知操作，用于通知从属DNS服务器有关资源记录的变更。
+UPDATE (5)：DNS更新操作，用于向DNS服务器添加或删除资源记录。"""
 DNS_OPCODE_TYPES = {
     0: "Standard query",
     1: "Inverse query",
@@ -254,17 +254,17 @@ DNS_OPCODE_TYPES = {
     5: "Update"
 }
 # DNS 响应码（Response Code），用于指示 DNS 响应的状态或结果
-# NoError (0)：没有错误。表示 DNS 查询成功，并且有回答部分。
-# FormErr (1)：格式错误。表示 DNS 查询的格式不正确，无法处理。
-# ServFail (2)：服务器故障。表示 DNS 服务器无法执行查询操作，可能是因为服务器内部问题。
-# NXDomain (3)：域名不存在。表示查询的域名不存在。
-# NotImp (4)：不支持的查询。表示 DNS 服务器不支持查询类型或操作码。
-# Refused (5)：拒绝查询。表示 DNS 服务器拒绝执行查询操作，可能是出于安全或策略原因。
-# YXDomain (6)：域名已存在。表示尝试创建的域名已存在。
-# YXRRSet (7)：资源记录集已存在。表示尝试创建的资源记录集已存在。
-# NXRRSet (8)：资源记录集不存在。表示资源记录集不存在。
-# NotAuth (9)：不授权。表示DNS服务器不是指定域名的权威服务器，无权执行查询操作。
-# NotZone (10)：不是区域。表示查询不是该DNS服务器的区域。
+"""NoError (0)：没有错误。表示 DNS 查询成功，并且有回答部分。
+FormErr (1)：格式错误。表示 DNS 查询的格式不正确，无法处理。
+ServFail (2)：服务器故障。表示 DNS 服务器无法执行查询操作，可能是因为服务器内部问题。
+NXDomain (3)：域名不存在。表示查询的域名不存在。
+NotImp (4)：不支持的查询。表示 DNS 服务器不支持查询类型或操作码。
+Refused (5)：拒绝查询。表示 DNS 服务器拒绝执行查询操作，可能是出于安全或策略原因。
+YXDomain (6)：域名已存在。表示尝试创建的域名已存在。
+YXRRSet (7)：资源记录集已存在。表示尝试创建的资源记录集已存在。
+NXRRSet (8)：资源记录集不存在。表示资源记录集不存在。
+NotAuth (9)：不授权。表示DNS服务器不是指定域名的权威服务器，无权执行查询操作。
+NotZone (10)：不是区域。表示查询不是该DNS服务器的区域。"""
 DNS_RCODE_TYPES = {
     0: "NoError",
     1: "FormErr",

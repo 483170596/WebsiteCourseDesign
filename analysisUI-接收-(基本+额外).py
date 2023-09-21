@@ -1,7 +1,4 @@
-import copy
-import datetime
-from tkinter.ttk import Combobox
-from common.constants.CommonConstants import *
+from common_constants.CommonConstants import *
 import scapy.utils
 from scapy.all import *
 from tkinter import *
@@ -11,14 +8,14 @@ import tkinter.messagebox as messagebox
 import datetime
 
 from scapy.layers.dns import DNS
-from scapy.layers.inet import IP, ICMP, TCP, in4_chksum, UDP
+from scapy.layers.inet import IP, ICMP, TCP, UDP
 from scapy.layers.inet6 import IPv6
 from scapy.layers.l2 import Ether, ARP
 
 
 # 对应进制转换
 def intbin(n, count, is_split=False):
-    # 添加可选字段：是否四位一隔
+    # TODO 添加可选字段：是否四位一隔
     """returns the binary of integer n, using count number of digits"""
     result = "".join([str((n >> y) & 1) for y in range(count - 1, -1, -1)])
     if is_split:
@@ -36,7 +33,7 @@ def intbin(n, count, is_split=False):
         return result
 
 
-# 大端字节序转为小端字节序
+# TODO大端字节序转为小端字节序
 def swap_endianness(n):
     return ((n >> 8) & 0x00FF) | ((n << 8) & 0xFF00)
 
@@ -74,26 +71,59 @@ class Application(tk.Tk):
     # 创建控制面板
     def createControlWidgets(self):
         # 创建控制面板
+        # TODO 修改成grid()布局方便添加单选组件
         controlFrame = Frame()
         self.countLabel = Label(controlFrame, text='请输入待捕获的数据帧数：')
-        self.countLabel.pack()
+        self.countLabel.grid(row=0, column=1, columnspan=7)
         countvar = StringVar(value='0')
         self.countInput = Entry(controlFrame, textvariable=countvar, width=6)
-        self.countInput.pack()
+        self.countInput.grid(row=1, column=1, columnspan=7)
         self.conditionLabel = Label(controlFrame, text='请输入捕获条件：')
-        self.conditionLabel.pack()
+        self.conditionLabel.grid(row=2, column=1, columnspan=7)
         self.conditionInput = Entry(controlFrame, width=60)
-        self.conditionInput.pack()
+        self.conditionInput.grid(row=3, column=1, columnspan=7)
+        # TODO 创建一组快捷选择
+        self._quick_selection(controlFrame)
         # 在创建控制面板设置startListenButton按键
         self.startListenButton = Button(controlFrame, text='开始捕获', command=self.start_sniff)
-        self.startListenButton.pack()
+        self.startListenButton.grid(row=5, column=1, columnspan=7)
         # 在创建控制面板放置clearButton按钮
         self.clearButton = Button(controlFrame, text='清空数据', command=self.clearData)
-        self.clearButton.pack()
+        self.clearButton.grid(row=6, column=1, columnspan=7)
         # 在创建控制面板放置stopListenButton按钮
         self.stopListenButoon = Button(controlFrame, text='停止捕获', command=self.stop_sniff)
-        self.stopListenButoon.pack()
+        self.stopListenButoon.grid(row=7, column=1, columnspan=7)
         controlFrame.pack(side=TOP, fill=Y)
+
+    # TODO 单选调用函数
+    def _sel(self):
+        self.conditionInput.delete(0, END)
+        self.conditionInput.insert(0, str(self.selected_option.get()))
+
+    # TODO 快捷选择
+    def _quick_selection(self, controlFrame):
+        self.selected_option = tk.StringVar()
+        # 创建单选按钮，设置不同的值和文本标签  将单选按钮排列在一行中
+        tk.Radiobutton(controlFrame, text="清空", variable=self.selected_option, value="", command=self._sel).grid(
+            row=4, column=0)
+        tk.Radiobutton(controlFrame, text="Ether", variable=self.selected_option, value="Ether",
+                       command=self._sel).grid(row=4, column=1)
+        tk.Radiobutton(controlFrame, text="ARP", variable=self.selected_option, value="ARP", command=self._sel).grid(
+            row=4, column=2)
+        tk.Radiobutton(controlFrame, text="IP", variable=self.selected_option, value="IP", command=self._sel).grid(
+            row=4, column=3)
+        tk.Radiobutton(controlFrame, text="IPv6", variable=self.selected_option, value="IPv6", command=self._sel).grid(
+            row=4, column=4)
+        tk.Radiobutton(controlFrame, text="TCP", variable=self.selected_option, value="TCP", command=self._sel).grid(
+            row=4, column=5)
+        tk.Radiobutton(controlFrame, text="UDP", variable=self.selected_option, value="UDP", command=self._sel).grid(
+            row=4, column=6)
+        tk.Radiobutton(controlFrame, text="ICMP", variable=self.selected_option, value="ICMP", command=self._sel).grid(
+            row=4, column=7)
+        tk.Radiobutton(controlFrame, text="DNS", variable=self.selected_option, value="DNS", command=self._sel).grid(
+            row=4, column=8)
+        # 设置默认选中的选项
+        self.selected_option.set("")
 
     # 创建显示捕获报文的摘要的窗口
     def createPDUSumPanedWindow(self):
@@ -697,7 +727,7 @@ class Application(tk.Tk):
         self.PDUCodeText.insert(END, scapy.utils.hexdump(mac_packet, True))
         pass
 
-    # IP flags
+    # TODO IP flags
     def ipflags(self, ip_flags):
         flags = 0
         if ip_flags == "DF":
@@ -711,7 +741,7 @@ class Application(tk.Tk):
             result = ", More fragments"
         return [intbin(flags, 3), hex(flags), result]  # 标志位二进制和十六进制
 
-    # 检验和计算和验证
+    # TODO IP检验和计算和验证
     def IP_headchecksum(self, ip_packet):
         _f_ip_packet = copy.deepcopy(ip_packet)  # 使用深拷贝，以免影响原数据包
         # 计算检验和
@@ -757,7 +787,7 @@ class Application(tk.Tk):
         # analysis_text += f"  Type: {str(ip_packet[Ether].type) + ' ' + ETHER_TYPES[ip_packet[Ether].type]}\n"  # 以太类型
         self.choosedEtherPDUAnalysis(ip_packet)  # 直接调用mac分析函数
 
-        analysis_text += f"Internet Protocol Version {ip_packet[IP].version} Src: {ip_packet[IP].src}, Dst: {ip_packet[IP].dst}\n"  # 版本和地址
+        analysis_text += f"Internet Protocol Version {ip_packet[IP].version}, Src: {ip_packet[IP].src}, Dst: {ip_packet[IP].dst}\n"  # 版本和地址
         analysis_text += f"  {intbin(ip_packet[IP].version, 4)}.... = Version: {ip_packet[IP].version}\n"  # IP的版本
         analysis_text += f"  ....{intbin(ip_packet[IP].ihl, 4)} = Header Length: {ip_packet[IP].ihl * 4} bytes ({ip_packet[IP].ihl})\n"  # 首部长度
         analysis_text += f"  Differentiated Service Field: 0x{ip_packet[IP].tos:04x}\n"  # 服务类型
@@ -851,7 +881,7 @@ class Application(tk.Tk):
 
         self.PDUAnalysisText.insert(END, analysis_text)
 
-    # 获取 TCP 的 Flag 每一位的值
+    # TODO 获取 TCP 的 Flag 每一位的值
     def tcpflag(self, tcpflag):
         result = {"bin": "", "hex": "", "Reserved": "", "NS": "",
                   "CWR": "", "ECE": "", "URG": "", "ACK": "",
@@ -954,7 +984,7 @@ class Application(tk.Tk):
         result["hex"] = f"0x{int(result['bin'], 2):03x}"
         return result
 
-    # 伪首部 部分数据
+    # TODO 伪首部 部分数据
     def pseudo_head(self, tcp_or_udp):
         pseudoHead = bytes()
         if tcp_or_udp.haslayer("IP"):
@@ -972,7 +1002,7 @@ class Application(tk.Tk):
                                           HEX[i[3]])
         return pseudoHead
 
-    # tcp 长度
+    # TODO tcp 长度
     def tcp_len(self, tcp_packet):
         length = 0
         if tcp_packet[TCP].haslayer('Padding'):
@@ -981,7 +1011,7 @@ class Application(tk.Tk):
             length = len(tcp_packet[TCP].payload)
         return length
 
-    # tcp校验和
+    # TODO tcp校验和
     def TCP_headchecksum(self, tcp_packet):
         _f_tcp_packet = copy.deepcopy(tcp_packet)  # 使用深拷贝，以免影响原数据包
         checksum1 = _f_tcp_packet[TCP].chksum
@@ -1084,7 +1114,7 @@ class Application(tk.Tk):
 
         self.PDUAnalysisText.insert(END, analysis_text)
 
-    # udp校验和
+    # TODO udp校验和
     def UDP_headchecksum(self, udp_packet):
         result_string = ""
         result = []
@@ -1151,7 +1181,7 @@ class Application(tk.Tk):
 
         self.PDUAnalysisText.insert(END, analysis_text)
 
-    # icmp校验和
+    # TODO icmp校验和
     def ICMP_headchecksum(self, icmp_packet):
         _f_icmp_packet = copy.deepcopy(icmp_packet)  # 使用深拷贝，以免影响原数据包
         # 计算检验和
@@ -1205,7 +1235,7 @@ class Application(tk.Tk):
 
         self.PDUAnalysisText.insert(END, analysis_text)
 
-    # dns flags
+    # TODO dns flags
     def dns_flags(self, dns_packet):
         result_string = ""
         flags = ""

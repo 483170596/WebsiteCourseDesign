@@ -8,7 +8,7 @@ from constants import *
 
 
 def int_bin(n, count, is_split=False):
-    """TODO 10进制转2进制，n：输入的10进制，count：输出的2进制位数，is_split：可选，是否四位一隔"""
+    """ TODO 10进制转2进制，n：输入的10进制，count：输出的2进制位数，is_split：可选，是否四位一隔"""
     result = "".join([str((n >> y) & 1) for y in range(count - 1, -1, -1)])
     if is_split:
         # 将二进制字符串从右到左分割成四位一组

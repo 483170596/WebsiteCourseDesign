@@ -76,7 +76,7 @@ def ip_pdu_analysis(app, ip_packet):
 
     analysis_text += f"  Time to live: {ip_packet[IP].ttl}\n"  # 生存时间
     analysis_text += f"  Protocol: {IP_PROTOS[ip_packet[IP].proto]} ({ip_packet[IP].proto})\n"  # 协议
-    # TODO ip 首部校验和
+    #  ip 首部校验和
     analysis_text += f"  Header  Checksum: {ip_head_checksum(ip_packet)[0]} {ip_head_checksum(ip_packet)[2]}\n"  # 首部校验和
     analysis_text += f"  [Header checksum status: {ip_head_checksum(ip_packet)[3]}]\n"
     analysis_text += f"  [Calculated checksum: {ip_head_checksum(ip_packet)[1]}]\n"
